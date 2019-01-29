@@ -1,7 +1,6 @@
 {
   "name": "music-sheet-generator",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -17,6 +16,8 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "author": "@denisflorkin",
+  "license": "MIT",
   "browserslist": [
     ">0.2%",
     "not dead",
