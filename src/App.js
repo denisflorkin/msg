@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import {
   c as cScale,
   d as dScale,
+  e as eScale,
 } from './data/scales'
 
 const defaultRange = 4;
@@ -50,7 +51,7 @@ export default function App() {
             />
           ))}
 
-          {/* Notes */}
+          {/* C */}
           {cScale.map(({ name, beatPosition, sharp, range }) => (
             <g>
               {
@@ -66,8 +67,30 @@ export default function App() {
             </g>
           ))}
 
-          {/* Notes */}
+          {/* D */}
           {dScale.map(({ name, beatPosition, sharp, range }) => (
+            <g>
+              {
+                sharp
+                  ? <text
+                      style={{ fontWeight: 'thin' }}
+                      x={(beatPosition * (WIDTH / tempoBase / tempoRythm)) - 16}
+                      y={(notesPosition[name] + 6)  - ((range - defaultRange) * 28 )}
+                    >
+                      #
+                    </text>
+                  : null
+              }
+              <circle
+                cx={beatPosition * (WIDTH / tempoBase / tempoRythm)}
+                cy={notesPosition[name] - ((range - defaultRange) * 28 )}
+                r="4"
+              />
+            </g>
+          ))}
+
+          {/* E */}
+          {eScale.map(({ name, beatPosition, sharp, range }) => (
             <g>
               {
                 sharp

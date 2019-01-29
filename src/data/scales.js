@@ -104,8 +104,64 @@ export const d = [
   }
 ];
 
+export const e = [
+  {
+    range: 4,
+    name: "e",
+    beatPosition: lt(16, 1, 7, 1, 4),
+    type: "half"
+  },
+  {
+    range: 4,
+    name: "f",
+    sharp: true,
+    beatPosition: lt(17, 1, 7, 1, 4),
+    type: "half"
+  },
+  {
+    range: 4,
+    name: "g",
+    sharp: true,
+    beatPosition: lt(18, 1, 7, 1, 4),
+    type: "half"
+  },
+  {
+    range: 4,
+    name: "a",
+    beatPosition: lt(19, 1, 7, 1, 4),
+    type: "half"
+  },
+  {
+    range: 4,
+    name: "b",
+    beatPosition: lt(20, 1, 7, 1, 4),
+    type: "half"
+  },
+  {
+    range: 5,
+    name: "c",
+    sharp: true,
+    beatPosition: lt(21, 1, 7, 1, 4),
+    type: "half"
+  },
+  {
+    range: 5,
+    name: "d",
+    sharp: true,
+    beatPosition: lt(22, 1, 7, 1, 4),
+    type: "half"
+  },
+  {
+    range: 5,
+    name: "e",
+    beatPosition: lt(23, 1, 7, 1, 4),
+    type: "half"
+  }
+];
+
 
 export default {
   c,
   d,
+  e,
 }
