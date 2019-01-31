@@ -1,10 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { lt } from "./utils";
 import {
   c as cScale,
   d as dScale,
   e as eScale,
 } from './data/scales'
+
+const bars = [
+  cScale,
+  dScale,
+  eScale,
+  [
+    {
+    range: 4,
+    name: "d",
+    // beatPosition: lt(8, 1, 7, 1, 4),
+    type: "half"
+  },
+  {
+    range: 4,
+    name: "e",
+    // beatPosition: lt(9, 1, 7, 1, 4),
+    type: "half"
+  },
+  ]
+]
 
 const defaultRange = 4;
 
@@ -51,7 +72,51 @@ export default function App() {
             />
           ))}
 
-          {/* C */}
+          {
+            bars.map((notes, barCount) => (
+              console.log('barCount', barCount) ||
+              notes.map(({ name, beatPosition, sharp, range }, j, list) => (
+                console.log('barCount', barCount) ||
+                console.log('j', j) ||
+                console.log('list.length', list.length) ||
+                console.log('$', lt(
+                      j,
+
+                      0,
+                      list.length,
+
+                      200,
+                      400,
+                      // (barCount + 0) * (WIDTH / 4),
+                      // (barCount + 1) * (WIDTH / 4)
+                    )) ||
+                <g>
+                  {
+                    sharp
+                      ? <text
+                          style={{ fontWeight: 'thin' }}
+                          x={(
+                            lt( j, 0, list.length, 0, (WIDTH / 4)) + (barCount * (WIDTH / 4))
+                          ) - 16}
+                          y={(notesPosition[name] + 6)  - ((range - defaultRange) * 28 )}
+                        >
+                          #
+                        </text>
+                        : null
+                  }
+                  <circle
+                    cx={ 
+                      lt( j, 0, list.length, 0, (WIDTH / 4)) + (barCount * (WIDTH / 4))
+                    }
+                    cy={notesPosition[name] - ((range - defaultRange) * 28 )}
+                    r="4"
+                  />
+                </g>
+              ))
+            ))
+          }
+
+          {/* C
           {cScale.map(({ name, beatPosition, sharp, range }) => (
             <g>
               {
@@ -60,14 +125,15 @@ export default function App() {
                   : null
               }
               <circle
-                cx={beatPosition * (WIDTH / tempoBase / tempoRythm)}
+                cx={ lt(beatPosition, 0, cScale.length, 0, 4) * (WIDTH / tempoBase / tempoRythm)}
                 cy={notesPosition[name] - ((range - defaultRange) * 28 )}
                 r="4"
               />
             </g>
           ))}
+          */}
 
-          {/* D */}
+          {/* D
           {dScale.map(({ name, beatPosition, sharp, range }) => (
             <g>
               {
@@ -89,7 +155,7 @@ export default function App() {
             </g>
           ))}
 
-          {/* E */}
+          {/* E
           {eScale.map(({ name, beatPosition, sharp, range }) => (
             <g>
               {
@@ -110,6 +176,7 @@ export default function App() {
               />
             </g>
           ))}
+          */}
         </svg>
       </div>
     </div>
