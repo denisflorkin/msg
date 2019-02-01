@@ -15,13 +15,11 @@ const bars = [
     {
     range: 4,
     name: "d",
-    // beatPosition: lt(8, 1, 7, 1, 4),
     type: "half"
   },
   {
     range: 4,
     name: "e",
-    // beatPosition: lt(9, 1, 7, 1, 4),
     type: "half"
   },
   ]
@@ -75,24 +73,10 @@ export default function App() {
           {
             bars.map((notes, barCount) => (
               console.log('barCount', barCount) ||
-              notes.map(({ name, beatPosition, sharp, range }, j, list) => (
-                console.log('barCount', barCount) ||
-                console.log('j', j) ||
-                console.log('list.length', list.length) ||
-                console.log('$', lt(
-                      j,
-
-                      0,
-                      list.length,
-
-                      200,
-                      400,
-                      // (barCount + 0) * (WIDTH / 4),
-                      // (barCount + 1) * (WIDTH / 4)
-                    )) ||
+              notes.map(({ name, beatPosition, sharp, flat, natural, range }, j, list) => (
                 <g>
                   {
-                    sharp
+                    sharp || flat || natural
                       ? <text
                           style={{ fontWeight: 'thin' }}
                           x={(
@@ -100,13 +84,17 @@ export default function App() {
                           ) - 16}
                           y={(notesPosition[name] + 6)  - ((range - defaultRange) * 28 )}
                         >
-                          #
+                          {sharp
+                            ? '#'
+                            : flat ? 'b' : 'n'
+                          }
                         </text>
                         : null
                   }
                   <circle
                     cx={ 
                       lt( j, 0, list.length, 0, (WIDTH / 4)) + (barCount * (WIDTH / 4))
+                      + lt( 1, 0, list.length, 0, (WIDTH / 4))/2
                     }
                     cy={notesPosition[name] - ((range - defaultRange) * 28 )}
                     r="4"
@@ -115,68 +103,6 @@ export default function App() {
               ))
             ))
           }
-
-          {/* C
-          {cScale.map(({ name, beatPosition, sharp, range }) => (
-            <g>
-              {
-                sharp
-                  ? <text>#</text>
-                  : null
-              }
-              <circle
-                cx={ lt(beatPosition, 0, cScale.length, 0, 4) * (WIDTH / tempoBase / tempoRythm)}
-                cy={notesPosition[name] - ((range - defaultRange) * 28 )}
-                r="4"
-              />
-            </g>
-          ))}
-          */}
-
-          {/* D
-          {dScale.map(({ name, beatPosition, sharp, range }) => (
-            <g>
-              {
-                sharp
-                  ? <text
-                      style={{ fontWeight: 'thin' }}
-                      x={(beatPosition * (WIDTH / tempoBase / tempoRythm)) - 16}
-                      y={(notesPosition[name] + 6)  - ((range - defaultRange) * 28 )}
-                    >
-                      #
-                    </text>
-                  : null
-              }
-              <circle
-                cx={beatPosition * (WIDTH / tempoBase / tempoRythm)}
-                cy={notesPosition[name] - ((range - defaultRange) * 28 )}
-                r="4"
-              />
-            </g>
-          ))}
-
-          {/* E
-          {eScale.map(({ name, beatPosition, sharp, range }) => (
-            <g>
-              {
-                sharp
-                  ? <text
-                      style={{ fontWeight: 'thin' }}
-                      x={(beatPosition * (WIDTH / tempoBase / tempoRythm)) - 16}
-                      y={(notesPosition[name] + 6)  - ((range - defaultRange) * 28 )}
-                    >
-                      #
-                    </text>
-                  : null
-              }
-              <circle
-                cx={beatPosition * (WIDTH / tempoBase / tempoRythm)}
-                cy={notesPosition[name] - ((range - defaultRange) * 28 )}
-                r="4"
-              />
-            </g>
-          ))}
-          */}
         </svg>
       </div>
     </div>
