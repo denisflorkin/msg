@@ -21,12 +21,15 @@ const tempoBase = 4;
 const tempoRythm = 4;
 
 export default function App(props) {
-  const { bars } = props;
+  const { bars, timeSign: { beat, measure } = {}, isFirstStaff, isTrebble = true } = props;
+
+  const clefLeftOffset = 24
+  const timeSignLeftOffset = 12
 
   return (
     <div style={{ padding: "32px 0" }}>
       <div style={{ maxWidth: "800px", margin: "0 auto" }} >
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
+        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} style={{ overflow: 'visible' }}>
           {/* base Staff */}
           {[...new Array(5)].map((_, i) => (
             <line
@@ -34,7 +37,7 @@ export default function App(props) {
               y1={i * 8}
               x2={WIDTH}
               y2={i * 8}
-              style={{ stroke: "black", strokeWidth: 1 }}
+              style={{ stroke: "black", strokeWidth: .5 }}
             />
           ))}
 
@@ -50,37 +53,74 @@ export default function App(props) {
           ))}
 
           {
-            bars.map((notes, barCount) => (
-              notes.map(({ name, beatPosition, sharp, flat, natural, range }, j, list) => (
-                <g>
-                  {
-                    sharp || flat || natural
-                      ? <text
-                          style={{ fontWeight: 'thin' }}
-                          x={(
-                            lt( j, 0, list.length, 0, (WIDTH / 4)) + (barCount * (WIDTH / 4))
-                            + lt( 1, 0, list.length, 0, (WIDTH / 4))/2
-                          ) - 16}
-                          y={(notesPosition[name] + 6)  - ((range - defaultRange) * 28 )}
-                        >
-                          {sharp
-                            ? '#'
-                            : flat ? 'b' : 'n'
-                          }
-                        </text>
-                        : null
+            isTrebble ? <text style={{ fontSize: '72px', fontWeight: 'thin' }} x={1} y={38.5} >&#119070;</text> : null
+          }
+
+          {
+            isFirstStaff
+              ? <g style={{ fontSize: '20px' }}>
+                <text x={clefLeftOffset} y={16}>{beat}</text>
+                <text x={clefLeftOffset} y={32}>{measure}</text>
+              </g>
+              : null
+          }
+
+          {
+            bars.map((notes, barCount) => {
+              return notes.map(({ name, beatPosition, sharp, flat, natural, range }, j, list) => {
+
+                const isFirstBar = barCount === 0
+                const isFirstNote = j === 0
+                const start = 0;
+                const end = list.length;
+
+                let notationLeftOffset = 0
+                if (isFirstStaff) {
+                  if (isFirstBar) {
+                    notationLeftOffset = clefLeftOffset + timeSignLeftOffset
                   }
-                  <circle
-                    cx={ 
-                      lt( j, 0, list.length, 0, (WIDTH / 4)) + (barCount * (WIDTH / 4))
-                      + lt( 1, 0, list.length, 0, (WIDTH / 4))/2
+                } else {
+                  if (isFirstBar) {
+                    notationLeftOffset = clefLeftOffset
+                  }
+                }
+
+                const targetStart = 0
+                const targetEnd = (WIDTH / 4) - notationLeftOffset
+                const barOffset = (barCount * targetEnd) + notationLeftOffset
+                const barCenteringOffset = lt( 1, start, end, targetStart, targetEnd)/2
+
+                const baseX = lt( j, start, end, targetStart, targetEnd) + barOffset + barCenteringOffset
+                  + (barCount * notationLeftOffset)
+
+                return (
+                  <g>
+                    {
+                      sharp || flat || natural
+                        ? <text
+                            style={{ fontWeight: 'thin' }}
+                            x={(
+                              baseX
+                            ) - 16}
+                            y={(notesPosition[name] + 6)  - ((range - defaultRange) * 28 )}
+                          >
+                            {sharp
+                              ? '#'
+                              : flat ? 'b' : 'n'
+                            }
+                          </text>
+                          : null
                     }
-                    cy={notesPosition[name] - ((range - defaultRange) * 28 )}
-                    r="4"
-                  />
-                </g>
-              ))
-            ))
+                    <circle
+                      cx={baseX}
+                      cy={notesPosition[name] - ((range - defaultRange) * 28 )}
+                      r="4"
+                    />
+                  </g>
+                )
+              }
+            )
+            })
           }
         </svg>
       </div>
