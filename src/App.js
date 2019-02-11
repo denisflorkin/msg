@@ -7,6 +7,7 @@ import Select from 'uxi/Input/Select'
 import Flex from 'uxi/Layout/Flex'
 import {
   c as cScale,
+  cSharp as cSharpScale,
   d as dScale,
   e as eScale,
 } from './data/scales'
@@ -21,20 +22,9 @@ const styles = css`
 
 const bars = [
   cScale,
+  cSharpScale,
   dScale,
   eScale,
-  [
-    {
-    range: 4,
-    name: "d",
-    type: "half"
-  },
-  {
-    range: 4,
-    name: "e",
-    type: "half"
-  },
-  ]
 ]
 const staffsData = [
   [...bars],

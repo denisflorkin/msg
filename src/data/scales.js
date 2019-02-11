@@ -43,6 +43,55 @@ export const c = [
   }
 ];
 
+export const cSharp = [
+  {
+    range: 4,
+    name: "c",
+    sharp: true,
+    type: "half"
+  },
+  {
+    range: 4,
+    name: "d",
+    sharp: true,
+    type: "half"
+  },
+  {
+    range: 4,
+    name: "f",
+    type: "half"
+  },
+  {
+    range: 4,
+    name: "f",
+    sharp: true,
+    type: "half"
+  },
+  {
+    range: 4,
+    name: "g",
+    sharp: true,
+    type: "half"
+  },
+  {
+    range: 4,
+    name: "a",
+    sharp: true,
+    type: "half"
+  },
+  {
+    range: 5,
+    name: "c",
+    type: "half"
+  },
+  {
+    range: 5,
+    name: "c",
+    sharp: true,
+    type: "half"
+  }
+];
+
 export const d = [
   {
     range: 4,
