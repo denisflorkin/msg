@@ -5,6 +5,7 @@ import ThemeProvider from 'uxi/Theme/ThemeProvider'
 import TextField from 'uxi/Input/TextField'
 import Select from 'uxi/Input/Select'
 import Flex from 'uxi/Layout/Flex'
+import Midi from './Midi'
 import {
   c as cScale,
   cSharp as cSharpScale,
@@ -75,6 +76,10 @@ export default class App extends Component {
             ))
           }
         </div>
+        <hr />
+        <br />
+        <br />
+        <Midi />
       </ThemeProvider>
     );
   }
