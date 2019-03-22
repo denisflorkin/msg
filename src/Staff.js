@@ -21,13 +21,57 @@ const tempoBase = 4;
 const tempoRythm = 4;
 
 export default function App(props) {
-  const { bars, timeSign: { beat, measure } = {}, isFirstStaff, isTrebble = true } = props;
+  const { 
+    bars,
+    timeSign: { beat, measure } = {},
+    isFirstStaff,
+    isTrebble = true,
+    index,
+    elapsedTime,
+    beatLengthInMs,
+    playing,
+  } = props;
 
   const clefLeftOffset = 24
   const timeSignLeftOffset = 12
 
+  const staffTimeRangeStart = (
+    (index * (beat * measure))
+    * beatLengthInMs
+  )
+  const staffTimeRangeEnd = (
+    ((index + 1) * (beat * measure))
+    * beatLengthInMs
+  )
+
+  const shouldRenderPlayHeadOnThisStaff = (
+    (
+      elapsedTime >= staffTimeRangeStart
+    ) && (
+      elapsedTime < staffTimeRangeEnd
+    )
+  )
+
+
+
+  console.log('elapsedTime', elapsedTime)
+  console.log('staffTimeRangeStart', staffTimeRangeStart)
+  console.log('staffTimeRangeEnd', staffTimeRangeEnd)
+  console.log('shouldRenderPlayHeadOnThisStaff', shouldRenderPlayHeadOnThisStaff)
+
+
+  let playHeadLeftOffset = -1
+  if (shouldRenderPlayHeadOnThisStaff) {
+    playHeadLeftOffset = lt(elapsedTime, staffTimeRangeStart, staffTimeRangeEnd, 0, WIDTH)
+  }
+
+
   return (
-    <div style={{ padding: "32px 0" }}>
+    <div style={{
+      padding: "32px 0",
+      ...(playing && !shouldRenderPlayHeadOnThisStaff ? { opacity: .4 } : {}),
+    }}
+  >
       <div style={{ maxWidth: "800px", margin: "0 auto" }} >
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} style={{ overflow: 'visible' }}>
           {/* base Staff */}
@@ -121,6 +165,18 @@ export default function App(props) {
               }
             )
             })
+          }
+
+          {
+            shouldRenderPlayHeadOnThisStaff && playHeadLeftOffset > -1 && (
+              <line
+                x1={playHeadLeftOffset}
+                y1={0}
+                x2={playHeadLeftOffset}
+                y2={HEIGHT}
+                style={{ stroke: 'rgba(0, 0, 0, .6)', strokeWidth: 3, }}
+              />
+            )
           }
         </svg>
       </div>
