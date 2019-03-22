@@ -1,6 +1,9 @@
 import React from 'react';
 // import notesDefinition from './notesDefinition'
 import sweetNotes from './sweetNotes'
+import { lt } from './utils';
+import { WIDTH } from './Staff';
+
 
 class Midi extends React.Component {
   constructor(props) {
@@ -122,6 +125,38 @@ class Midi extends React.Component {
 
   render () {
     const { acquired, currentNotes } = this.state;
+    const {
+      staffsData,
+      playing,
+      elapsedTime,
+      tempo,
+      timeSign,
+      beatLengthInMs,
+      index = 0,
+      timeSign: { beat, measure } = {},
+    } = this.props;
+
+     const staffTimeRangeStart = (
+      (index * (beat * measure))
+      * beatLengthInMs
+    )
+    const staffTimeRangeEnd = (
+      ((index + 1) * (beat * measure))
+      * beatLengthInMs
+    )
+
+    const shouldRenderPlayHeadOnThisStaff = (
+      (
+        elapsedTime >= staffTimeRangeStart
+      ) && (
+        elapsedTime < staffTimeRangeEnd
+      )
+    )
+
+    let playHeadLeftOffset = -1
+    if (shouldRenderPlayHeadOnThisStaff) {
+      playHeadLeftOffset = lt(elapsedTime, staffTimeRangeStart, staffTimeRangeEnd, 0, WIDTH)
+    }
 
 
     return (

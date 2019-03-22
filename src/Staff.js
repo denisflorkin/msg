@@ -14,8 +14,8 @@ const notesPosition = {
   b: 16
 };
 
-const WIDTH = 800;
-const HEIGHT = 48;
+export const WIDTH = 800;
+export const HEIGHT = 48;
 
 const tempoBase = 4;
 const tempoRythm = 4;

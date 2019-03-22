@@ -28,9 +28,9 @@ const styles = css`
 `.join('\n');
 
 const bars = [
+  [],
   cScale,
   cSharpScale,
-  [],
   [],
   // cScale,
   // cScale,
@@ -188,7 +188,6 @@ export default class App extends Component {
                 isFirstStaff={i === 0}
                 bars={bars}
                 index={i}
-                timeSign={ this.state.timeSign }
                 playing={playing}
                 elapsedTime={elapsedTime}
                 tempo={elapsedTime}
@@ -201,7 +200,14 @@ export default class App extends Component {
         <hr />
         <br />
         <br />
-        <Midi />
+        <Midi
+          staffsData={staffsData}
+          playing={playing}
+          elapsedTime={elapsedTime}
+          tempo={elapsedTime}
+          timeSign={timeSign}
+          beatLengthInMs={beatLengthInMs}
+        />
       </ThemeProvider>
     );
   }
