@@ -126,7 +126,7 @@ class Midi extends React.Component {
 
     return (
       <div>
-        <div>acquired ? 'Midi acquired' : null</div>
+        <div>{acquired ? 'Midi acquired! 🎹 👌' : null}</div>
         <h1 style={{ fontSize: '3rem' }}>
           {
             currentNotes.map(note => (
