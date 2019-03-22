@@ -13,8 +13,8 @@ import Midi from './Midi'
 import {
   c as cScale,
   cSharp as cSharpScale,
-  d as dScale,
-  e as eScale,
+  // d as dScale,
+  // e as eScale,
 } from './data/scales'
 import { Stop } from "uxi/Icons";
 import sweetNotes from './sweetNotes'
@@ -30,12 +30,17 @@ const styles = css`
 const bars = [
   cScale,
   cSharpScale,
-  dScale,
-  eScale,
+  [],
+  [],
+  // cScale,
+  // cScale,
+  // cScale,
+  // dScale,
+  // eScale,
 ]
 const staffsData = [
   [...bars],
-  [...bars],
+  // [...bars],
   // bars.reverse(),
 ]
 

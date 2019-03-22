@@ -1,49 +1,14 @@
 import { lt } from '../utils'
+import sweetNotes from '../sweetNotes'
 
-export const c = [
-  {
-    range: 4,
-    name: "c",
-    type: "half"
-  },
-  {
-    range: 4,
-    name: "d",
-    type: "half"
-  },
-  {
-    range: 4,
-    name: "e",
-    type: "half"
-  },
-  {
-    range: 4,
-    name: "f",
-    type: "half"
-  },
-  {
-    range: 4,
-    name: "g",
-    type: "half"
-  },
-  {
-    range: 4,
-    name: "a",
-    type: "half"
-  },
-  {
-    range: 4,
-    name: "b",
-    type: "half"
-  },
-  {
-    range: 5,
-    name: "c",
-    type: "half"
-  }
-];
+const getNoteFromMidiValue = midiVal => sweetNotes[midiVal] || null;
 
-export const cSharp = [
+export const cNotes = [60, 62, 64, 65, 67, 69, 71, 72];
+export const c = cNotes.map(getNoteFromMidiValue)
+
+export const cSharpNotes = [61, 63, 65, 66, 68, 70, 72, 73];
+export const cSharp = cSharpNotes.map(getNoteFromMidiValue)
+/*[
   {
     range: 4,
     name: "c",
@@ -90,7 +55,7 @@ export const cSharp = [
     sharp: true,
     type: "half"
   }
-];
+];*/
 
 export const d = [
   {

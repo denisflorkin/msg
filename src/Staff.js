@@ -22,6 +22,12 @@ const tempoRythm = 4;
 
 const noteWidth = 8;
 
+const getNoteYPosition = name => {
+  const firstChar = name[0]
+  const notePosition = notesPosition[firstChar.toLowerCase()]
+  return notePosition || 0
+}
+
 export default function App(props) {
   const { 
     bars,
@@ -54,19 +60,10 @@ export default function App(props) {
     )
   )
 
-
-
-  console.log('elapsedTime', elapsedTime)
-  console.log('staffTimeRangeStart', staffTimeRangeStart)
-  console.log('staffTimeRangeEnd', staffTimeRangeEnd)
-  console.log('shouldRenderPlayHeadOnThisStaff', shouldRenderPlayHeadOnThisStaff)
-
-
   let playHeadLeftOffset = -1
   if (shouldRenderPlayHeadOnThisStaff) {
     playHeadLeftOffset = lt(elapsedTime, staffTimeRangeStart, staffTimeRangeEnd, 0, WIDTH)
   }
-
 
   return (
     <div style={{
@@ -113,8 +110,12 @@ export default function App(props) {
 
           {
             bars.map((notes, barCount) => {
-              return notes.map(({ name, beatPosition, sharp, flat, natural, range }, j, list) => {
-
+              return notes.map(({ name, midiValue, /* beatPosition,  sharp, flat,  natural , range */ }, j, list) => {
+                const natural = false
+                const sharp = (name.indexOf('#') > -1)
+                const flat = (name.indexOf('b') > -1)
+                const rangeMatches = name.match(/^[^\d]*(\d){1}/)
+                const range = rangeMatches && parseInt(rangeMatches[1], 10)
                 const isFirstBar = barCount === 0
                 const isFirstNote = j === 0
                 const start = 0;
@@ -139,6 +140,17 @@ export default function App(props) {
                 const baseX = lt( j, start, end, targetStart, targetEnd) + barOffset + barCenteringOffset
                   + (barCount * notationLeftOffset)
 
+                // const currentNoteYPosition = getNoteYPosition(name);
+                const textCurrentNoteYPosition = (
+                  getNoteYPosition(name)
+                  - ((range - defaultRange) * 28)
+                );
+
+                const currentNoteYPosition = (
+                  getNoteYPosition(name)
+                  - ((range - defaultRange) * 28 )
+                );
+
                 return (
                   <g>
                     {
@@ -148,7 +160,7 @@ export default function App(props) {
                             x={(
                               baseX
                             ) - 16}
-                            y={(notesPosition[name] + 6)  - ((range - defaultRange) * 28 )}
+                            y={textCurrentNoteYPosition + 6}
                           >
                             {sharp
                               ? '#'
@@ -159,7 +171,7 @@ export default function App(props) {
                     }
                     <circle
                       cx={baseX}
-                      cy={notesPosition[name] - ((range - defaultRange) * 28 )}
+                      cy={currentNoteYPosition}
                       r={noteWidth/2}
                     />
                   </g>

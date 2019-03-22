@@ -130,7 +130,7 @@ class Midi extends React.Component {
         <h1 style={{ fontSize: '3rem' }}>
           {
             currentNotes.map(note => (
-              <div key={note.name}>{note.name} <small>({note.velocity})</small></div>
+              <div key={note.name}>{note.name} <small>({note.midiValue})</small></div>
             ))
           }
         </h1>
