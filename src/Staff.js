@@ -20,6 +20,8 @@ const HEIGHT = 48;
 const tempoBase = 4;
 const tempoRythm = 4;
 
+const noteWidth = 8;
+
 export default function App(props) {
   const { 
     bars,
@@ -158,7 +160,7 @@ export default function App(props) {
                     <circle
                       cx={baseX}
                       cy={notesPosition[name] - ((range - defaultRange) * 28 )}
-                      r="4"
+                      r={noteWidth/2}
                     />
                   </g>
                 )
@@ -174,7 +176,11 @@ export default function App(props) {
                 y1={0}
                 x2={playHeadLeftOffset}
                 y2={HEIGHT}
-                style={{ stroke: 'rgba(0, 0, 0, .6)', strokeWidth: 3, }}
+                style={{
+                  // stroke: 'rebeccapurple',
+                  stroke: 'rgba(102, 51, 153, 0.6)',
+                  strokeWidth: noteWidth,
+                }}
               />
             )
           }

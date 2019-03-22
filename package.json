@@ -6,7 +6,7 @@
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3",
     "styled-components": "^3.0.0",
-    "uxi": "^0.1.411"
+    "uxi": "^0.1.435"
   },
   "scripts": {
     "start": "react-scripts start",

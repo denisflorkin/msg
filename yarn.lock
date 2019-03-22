@@ -10078,10 +10078,10 @@ uuid@^3.0.1, uuid@^3.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
 
-uxi@^0.1.411:
-  version "0.1.411"
-  resolved "https://registry.yarnpkg.com/uxi/-/uxi-0.1.411.tgz#4f6e01f1f5dbe26f873a1daff0d9c1f2833dc748"
-  integrity sha512-79LPGvwDD1HysFJm9/0Oev377c2iuCNaZpGKitk/q/T4pEb49vYSMa7YTYOUNZtK3ZYd6JBTJ82t6rVcB0qeQw==
+uxi@^0.1.435:
+  version "0.1.435"
+  resolved "https://registry.yarnpkg.com/uxi/-/uxi-0.1.435.tgz#d11bb9702f54ee77bc09e93136a71a6444ab6ded"
+  integrity sha512-bvumxlnNTHCaqgJ54DM8vCaizKH9S6z4RATKRxHBpcMAVe0Cv2NKx4kQpxawmJKptZP7EBhdnxbw8Zvk8i7NKQ==
   dependencies:
     babel-eslint "^8.2.3"
     classnames "^2.2.5"

@@ -17,6 +17,7 @@ import {
   e as eScale,
 } from './data/scales'
 import { Stop } from "uxi/Icons";
+import sweetNotes from './sweetNotes'
 
 const styles = css`
   svg {
@@ -48,6 +49,7 @@ export default class App extends Component {
       playing: false,
       audioContext: {},
       startTime: 0,
+      mainKeyMidiValue: 60,
     }
   }
 
@@ -93,6 +95,7 @@ export default class App extends Component {
       startTime,
       currentTime,
       timeSign,
+      mainKeyMidiValue,
     } = this.state;
 
     const elapsedTime = currentTime - startTime
@@ -109,20 +112,30 @@ export default class App extends Component {
           /
           <TextField defaultValue={"4"} onChange={(e, v) => this.setState({ timeSign: { ...this.state.timeSign, measure: v,  }}) } />
         </Flex>
-        <Flex><h4>key: </h4><Select>
-            <Flex value="C">C</Flex>
-            <Flex value="C#">C#</Flex>
-            <Flex value="D">D</Flex>
-            <Flex value="D#">D#</Flex>
-            <Flex value="E">E</Flex>
-            <Flex value="F">F</Flex>
-            <Flex value="F#">F#</Flex>
-            <Flex value="G">G</Flex>
-            <Flex value="G#">G#</Flex>
-            <Flex value="A">A</Flex>
-            <Flex value="A#">A#</Flex>
-            <Flex value="B">B</Flex>
-          </Select>
+        <Flex>
+          <h4>key: </h4>
+            <Select
+              style={{ width: '200px' }}
+              value={mainKeyMidiValue}
+              onChange={(ev, val) => { this.setState({ mainKeyMidiValue: val })}}
+            >
+              {
+                sweetNotes.map(({ name, midiValue }) => (
+                  <Flex value={midiValue}>{name}</Flex>
+                ))
+              }
+              <Flex value="C#">C#</Flex>
+              <Flex value="D">D</Flex>
+              <Flex value="D#">D#</Flex>
+              <Flex value="E">E</Flex>
+              <Flex value="F">F</Flex>
+              <Flex value="F#">F#</Flex>
+              <Flex value="G">G</Flex>
+              <Flex value="G#">G#</Flex>
+              <Flex value="A">A</Flex>
+              <Flex value="A#">A#</Flex>
+              <Flex value="B">B</Flex>
+            </Select>
         </Flex>
         <Flex>
           <Flex style={{ width: '520px' }}>
