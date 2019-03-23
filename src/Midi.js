@@ -195,13 +195,15 @@ class Midi extends React.Component {
         noteIdxToPlay = Math
           .round(
             lt(
-              elapsedTime,
+              elapsedTime - ((staffTimeRangeStart / measure) * (theBarIdx)),
               // staffTimeRangeStart,
               0,
+              // totalStaffTimeRangeLength * (theBarIdx + 1),
               // staffTimeRangeEnd / 4,
-              totalStaffTimeRangeLength / 4,
+              elapsedTime - ((staffTimeRangeStart / measure) * (theBarIdx + 1)) ,
+              // totalStaffTimeRangeLength * (theBarIdx + 2),
               0,
-              (theStaff || []).length - 1
+              (theStaff[theBarIdx] || []).length - 1
             )
           )
 
