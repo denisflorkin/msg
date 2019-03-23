@@ -53,7 +53,7 @@ export default class App extends Component {
 
     this.state = {
       timeSign: { beat: 4, measure: 4 },
-      tempo: 120,
+      tempo: 70,
       playing: false,
       audioContext: {},
       startTime: 0,

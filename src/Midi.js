@@ -186,24 +186,33 @@ class Midi extends React.Component {
 
       let noteIdxToPlay = undefined
       if (shouldRenderPlayHeadOnThisStaff) {
-        if (theBarIdx === Infinity) {
+        if (theBarIdx === Infinity || !theStaff[theBarIdx]) {
           return
         }
 
         const totalStaffTimeRangeLength = staffTimeRangeEnd - staffTimeRangeStart
 
+        const timePoint = elapsedTime - ((staffTimeRangeStart / measure) * (theBarIdx))
+        const maxTimePointEndRange = staffTimeRangeEnd - (4 - ((staffTimeRangeStart / measure) * (theBarIdx )))
+        const targetRangeMax = (theStaff[theBarIdx] || []).length - 1
+
+        console.log('theStaff[theBarIdx]', theStaff[theBarIdx])
+        console.log('timePoint', timePoint)
+        console.log('maxTimePointEndRange', maxTimePointEndRange)
+        console.log('targetRangeMax', targetRangeMax)
+
         noteIdxToPlay = Math
-          .round(
+          .floor(
             lt(
-              elapsedTime - ((staffTimeRangeStart / measure) * (theBarIdx)),
+              timePoint,
               // staffTimeRangeStart,
               0,
               // totalStaffTimeRangeLength * (theBarIdx + 1),
               // staffTimeRangeEnd / 4,
-              elapsedTime - ((staffTimeRangeStart / measure) * (theBarIdx + 1)) ,
+              maxTimePointEndRange,
               // totalStaffTimeRangeLength * (theBarIdx + 2),
               0,
-              (theStaff[theBarIdx] || []).length - 1
+              targetRangeMax,
             )
           )
 
