@@ -30,9 +30,9 @@ const styles = css`
 
 const bars = [
   [],
-  [],
-  // cScale,
+  // [],
   devCScale,
+  cScale,
   // cSharpScale,
   [],
   // cScale,
