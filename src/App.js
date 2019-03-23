@@ -11,6 +11,7 @@ import UnstyledButton from 'uxi/Button/UnstyledButton1'
 import OutlineButton from 'uxi/Button/OutlineButton'
 import Midi from './Midi'
 import {
+  devCScale,
   c as cScale,
   cSharp as cSharpScale,
   // d as dScale,
@@ -29,8 +30,10 @@ const styles = css`
 
 const bars = [
   [],
-  cScale,
-  cSharpScale,
+  [],
+  // cScale,
+  devCScale,
+  // cSharpScale,
   [],
   // cScale,
   // cScale,
@@ -204,7 +207,7 @@ export default class App extends Component {
           staffsData={staffsData}
           playing={playing}
           elapsedTime={elapsedTime}
-          tempo={elapsedTime}
+          tempo={tempo}
           timeSign={timeSign}
           beatLengthInMs={beatLengthInMs}
         />

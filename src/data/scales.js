@@ -3,6 +3,7 @@ import sweetNotes from '../sweetNotes'
 
 const getNoteFromMidiValue = midiVal => sweetNotes[midiVal] || null;
 
+export const devCScale = [60, 60, 60, 60, 60, 60, 60, 60].map(getNoteFromMidiValue);
 export const cNotes = [60, 62, 64, 65, 67, 69, 71, 72];
 export const c = cNotes.map(getNoteFromMidiValue)
 
